@@ -1,5 +1,5 @@
 ****************
-Monitoring Tasks
+General Concept
 ****************
 
 Each diagnostic used to monitor an EC-Earth run is implemented as a ScriptEngine Task. 
@@ -24,4 +24,8 @@ A Processing Task can be seen as the implementation concept of a single monitori
 
 1. Get the data used to compute the diagnostic - i.e., find the correct file(s) in the output folder.
 2. Compute the monitoring diagnostic.
-3. Parse the diagnostic, including appropriate metadata, to a netCDF or YAML file named "exp_id-monitoring-id". This file can be used by visualization tasks.
+3. Parse the diagnostic, including appropriate metadata, to a netCDF or YAML file. This file can be used by visualization tasks.
+
+Presentation Tasks
+##################
+
