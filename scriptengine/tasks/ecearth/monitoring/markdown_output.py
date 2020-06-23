@@ -194,7 +194,7 @@ def make_dynamic_map(src_path, dst_folder, dyn_map_cube):
         dyn_map_cube.attributes["presentation_max"]
     ]
     unit_text = f"{fmt_units(dyn_map_cube.units)}"
-    dst_file = f"./{base_name}.gif"
+    dst_file = f"./{base_name}.mp4"
     with cd(f"{dst_folder}/{png_dir}"):
         for time_step in range(number_of_pngs, number_of_time_steps):
             time_coord = dyn_map_cube[time_step].coord('time')
@@ -209,11 +209,11 @@ def make_dynamic_map(src_path, dst_folder, dyn_map_cube):
                 units=unit_text,
             )
             fig.savefig(f"./{base_name}-{time_step:03}.png", bbox_inches="tight")
-            plt.close(fig)   
-        images = []
+            plt.close(fig)
+        
+        writer = imageio.get_writer(f'.{dst_file}', fps=2)
         for file_name in sorted(os.listdir(".")):
-            images.append(imageio.imread(file_name))
-        imageio.mimsave(f'.{dst_file}', images, fps=2)
+            writer.append_data(imageio.imread(file_name))
 
     image_dict = {
         'title': dyn_map_cube.attributes['title'],
